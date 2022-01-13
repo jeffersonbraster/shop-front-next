@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import React from 'react'
-import useSWR from 'swr'
+import { useQuery } from '../../utils/graphql'
 
 const fetcher = async (query: any) => {
   const res = await fetch('http://localhost:3000/graphql', {
@@ -27,7 +27,7 @@ const query = {
 }
 
 const Category: NextPage = () => {
-  const { data, error } = useSWR(JSON.stringify(query), fetcher)
+  const { data, error } = useQuery(query)
 
   console.log(data, error)
 
