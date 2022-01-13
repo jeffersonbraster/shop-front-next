@@ -6,8 +6,7 @@ import Table from '../../components/Table'
 import Title from '../../components/Title'
 import { useQuery } from '../../utils/graphql'
 
-const query = {
-  query: `
+const GET_ALL_CATEGORIES = `
     query{
       getAllCategories{
         id
@@ -15,11 +14,10 @@ const query = {
         slug
       }
     }
-  `,
-}
+  `
 
 const Index: NextPage = () => {
-  const { data, error } = useQuery(query)
+  const { data, error } = useQuery(GET_ALL_CATEGORIES)
 
   return (
     <Layout>

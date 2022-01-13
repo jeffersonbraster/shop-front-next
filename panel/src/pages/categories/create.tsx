@@ -5,8 +5,7 @@ import Layout from '../../components/Layout'
 import Title from '../../components/Title'
 import { useMutation } from '../../utils/graphql'
 
-const mutation = {
-  query: `
+const CREATE_CATEGORY = `
     mutation createCategory($name: String!, $slug: String!){
       createCategory(input: {
         name: $name,
@@ -17,11 +16,10 @@ const mutation = {
         slug
       }
     }
-  `,
-}
+  `
 
 const Create = () => {
-  const [data, createCategory] = useMutation(mutation)
+  const [data, createCategory] = useMutation(CREATE_CATEGORY)
   const router = useRouter()
 
   const form = useFormik({
@@ -30,8 +28,8 @@ const Create = () => {
       slug: '',
     },
     onSubmit: async (values) => {
-      createCategory ? createCategory(values) : ''
-      router.push('/categories')
+      createCategory ? createCategory(values) : null
+      //router.push('/categories')
     },
   })
 
