@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useSWR from 'swr'
 
 const fetcher = async (query: any) => {
@@ -16,4 +17,20 @@ const useQuery = (query: any) => {
   return useSWR(JSON.stringify(query), fetcher)
 }
 
-export { useQuery }
+const useMutation = (query: any) => {
+  const [data, setData] = useState(null)
+  const mutate = async (variables: any) => {
+    const mutation = {
+      ...query,
+      variables,
+    }
+    try {
+      const returnedData = await fetcher(JSON.stringify(mutation))
+      setData(returnedData)
+    } catch (error) {}
+  }
+
+  return [data, mutate]
+}
+
+export { useQuery, useMutation }
