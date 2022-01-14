@@ -4,7 +4,7 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import Table from '../../components/Table'
 import Title from '../../components/Title'
-import { useQuery } from '../../utils/graphql'
+import { useMutation, useQuery } from '../../utils/graphql'
 
 const GET_ALL_CATEGORIES = `
     query{
@@ -15,9 +15,21 @@ const GET_ALL_CATEGORIES = `
       }
     }
   `
+const DELETE_CATEGORY = `
+mutation deleteCategory($id: String!){
+    deleteCategory(id: $id)
+}
+`
 
 const Index: NextPage = () => {
-  const { data, error } = useQuery(GET_ALL_CATEGORIES)
+  const { data, mutate } = useQuery(GET_ALL_CATEGORIES)
+
+  const [deleteData, deleteCategory] = useMutation(DELETE_CATEGORY)
+
+  const remove = (id: string) => async () => {
+    deleteCategory!({ id })
+    mutate()
+  }
 
   return (
     <Layout>
