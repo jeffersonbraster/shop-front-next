@@ -29,7 +29,7 @@ const Create = () => {
     },
     onSubmit: async (values) => {
       createCategory ? createCategory(values) : null
-      //router.push('/categories')
+      router.push('/categories')
     },
   })
 
