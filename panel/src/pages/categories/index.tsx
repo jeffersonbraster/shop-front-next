@@ -1,6 +1,8 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
 import React from 'react'
+import Alert from '../../components/Alert'
+import Button from '../../components/Button'
 import Layout from '../../components/Layout'
 import Table from '../../components/Table'
 import Title from '../../components/Title'
@@ -56,7 +58,7 @@ const Index: NextPage = () => {
                 <Table.Body>
                   {data &&
                     data.getAllCategories &&
-                    data.getAllCategories.map((item) => {
+                    data.getAllCategories.map((item: any) => {
                       return (
                         <Table.Tr key={item.id}>
                           <Table.Td>
@@ -73,7 +75,7 @@ const Index: NextPage = () => {
                           </Table.Td>
 
                           <Table.Td>
-                            <Link href={`/categories/${item.id}/edit`}>
+                            <Link href={`/categories/${item.id}`}>
                               <a className="text-indigo-600 hover:text-indigo-900">
                                 Edit
                               </a>
